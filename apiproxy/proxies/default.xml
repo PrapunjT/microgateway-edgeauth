@@ -6,6 +6,7 @@
             <Condition>(fault.name Matches "ExecutionFailed")</Condition>
             <Step>
                 <Condition>(calloutResponse.status.code = "401") </Condition>
+                <FaultRules/>
                 <Name>AuthenticationError</Name>
             </Step>
         </FaultRule>
@@ -464,6 +465,99 @@
                 </Step>
             </Response>
             <Condition>(proxy.pathsuffix MatchesPath "/v2/quotas**") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="CredentialGet">
+            <Description/>
+            <Request>
+                <Step>
+                    <Condition>request.header.Authorization is null</Condition>
+                    <FaultRules/>
+                    <Name>AuthenticationError</Name>
+                </Step>
+                <Step>
+                    <Name>Credential-Call</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>Send-Response</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/credential") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="CredentialPost">
+            <Description/>
+            <Request>
+                <Step>
+                    <Condition>request.header.Authorization is null</Condition>
+                    <FaultRules/>
+                    <Name>AuthenticationError</Name>
+                </Step>
+                <Step>
+                    <Name>Populate-Key-Secret</Name>
+                </Step>
+                <Step>
+                    <Name>Add-Key-Secret</Name>
+                </Step>
+                <Step>
+                    <Name>Credential-Post-Call</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/credential") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="CredentialDelete">
+            <Description/>
+            <Request>
+                <Step>
+                    <Condition>request.header.Authorization is null</Condition>
+                    <FaultRules/>
+                    <Name>AuthenticationError</Name>
+                </Step>
+                <Step>
+                    <Name>Credential-Delete-Call</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/credential") and (request.verb = "DELETE")</Condition>
+        </Flow>
+        <Flow name="Region">
+            <Description/>
+            <Request>
+                <Step>
+                    <Condition>request.header.Authorization is null</Condition>
+                    <FaultRules/>
+                    <Name>AuthenticationError</Name>
+                </Step>
+                <Step>
+                    <Name>Region-Call</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>Send-Response</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/region") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Bootstrap">
+            <Description/>
+            <Request>
+                <Step>
+                    <Condition>request.header.Authorization is null</Condition>
+                    <FaultRules/>
+                    <Name>AuthenticationError</Name>
+                </Step>
+                <Step>
+                    <Name>Bootstrap-Call</Name>
+                </Step>
+            </Request>
+            <Response>
+                <Step>
+                    <Name>Send-Response</Name>
+                </Step>
+            </Response>
+            <Condition>(proxy.pathsuffix MatchesPath "/bootstrap") and (request.verb = "GET")</Condition>
         </Flow>
         <Flow name="Unknown Request">
             <Description>Unknown Request</Description>

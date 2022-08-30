@@ -58,6 +58,13 @@
         <Policy>Update-KVM-Future-Keys</Policy>
         <Policy>Validate-Future-Key-Nbf</Policy>
         <Policy>Delete-KVM-Future-Keys</Policy>
+        <Policy>BootStrap-Call</Policy>
+        <Policy>Credentials-Call</Policy>
+        <Policy>Credentials-Post-Call</Policy>
+        <Policy>Credentials-Delete-Call</Policy>
+        <Policy>Region-Call</Policy>
+        <Policy>Populate-Key-Secret</Policy>
+        <Policy>Add-Key-Secret</Policy>
     </Policies>
     <ProxyEndpoints>
         <ProxyEndpoint>default</ProxyEndpoint>
@@ -80,6 +87,8 @@
         <Resource>jsc://set-response.js</Resource>
         <Resource>jsc://upgrade-kvm.js</Resource>
         <Resource>jsc://validate-params.js</Resource>
+        <Resource>jsc://send-response.js</Resource>
+        <Resource>jsc://populate-key-secret.js</Resource>
     </Resources>
     <Spec></Spec>
     <TargetServers/>

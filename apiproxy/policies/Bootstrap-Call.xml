@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceCallout async="false" continueOnError="false" enabled="true" name="Bootstrap-Call">
+    <DisplayName>Bootstrap Call</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <Request clearPayload="false" variable="servicecallout.request">
+        <Set>
+            <Headers>
+                <Header name="Authorization">{request.header.Authorization}</Header>
+            </Headers>
+            <Verb>GET</Verb>
+            <Path>/edgemicro/bootstrap/organization/{organization.name}/environment/{environment.name}</Path>
+        </Set>
+        <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
+    </Request>
+    <Response>credentialResponse</Response>
+    <HTTPTargetConnection>
+        <Properties/>
+        <URL>https://edgemicroservices.apigee.net</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>
